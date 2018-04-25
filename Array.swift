@@ -36,5 +36,14 @@ extension Array {
             return r
         })
     }
+
+    func interleave(with b: [Element]) -> [Element]
+        // taken from https://stackoverflow.com/questions/34951824/how-can-i-interleave-two-arrays
+    {
+        let l = Swift.min(self.count, b.count)          // Swift.min required. Otherwise Array.min
+        return zip(self, b).flatMap { [$0, $1] }
+            + self.suffix(from: l)
+            + b.suffix(from: l)
+    }
     
 }
